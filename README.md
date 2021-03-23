@@ -43,7 +43,7 @@ Snort logs:
 03/23-12:49:51.617427  [**] [1:2019284:1] ET ATTACK_RESPONSE Output of id command from HTTP server [**] [Classification: Potentially Bad Traffic] [Priority: 2] {TCP} 172.28.128.3:54688 -> 172.28.128.1:4444
 ```
 ### Unidentified Attack 1: Docker Daemon Local Privilege Escalation
-As mentioned in the [known exploits](https://stuffwithaurum.com/2020/04/17/metasploitable-3-linux-an-exploitation-guide/), the docker daemon running on the target mahcine exposes an unprotected TCP socket. We can use the session obtained from the attack on Unreal IRCd as this session is running by a user who is in docker group. First we keep the obtained session running on background:
+As mentioned in the [known exploits](https://stuffwithaurum.com/2020/04/17/metasploitable-3-linux-an-exploitation-guide/), the Docker daemon running on the target mahcine exposes an unprotected TCP socket. We can use the session obtained from the attack on Unreal IRCd as this session is running by a user who is in docker group. First we keep the obtained session running on background:
 ![](https://github.com/yumoL/cybersecurity-project2/blob/main/images/ircd-background.png)
 Then we can exploit this vulnerability using the “exploit/linux/local/docker_daemon_privilege_escalation” module.:
 ![](https://github.com/yumoL/cybersecurity-project2/blob/main/images/docker-exploit.png)
@@ -54,10 +54,10 @@ In the previous attack we can obtain a list of usernames
 
 ![](https://github.com/yumoL/cybersecurity-project2/blob/main/images/usernames.png)
 
-We save these usernames to [usernames.txt](https://github.com/yumoL/cybersecurity-project2/blob/main/usernames.txt). In this SSH attack we use the “auxiliary/scanner/ssh/ssh_login” module to test if there is such a credential where username and password are the same. If such username-password pair is found very quickly, for example, within 0-4 login attempts, Snort does not raise any alert. We already know that the password of username "vagrant" is also "vagrant", so we move "vagrant" to the second line of username list and run brute-forcing ssh:
+We save these usernames to [usernames.txt](https://github.com/yumoL/cybersecurity-project2/blob/main/usernames.txt). In this SSH attack we use the “auxiliary/scanner/ssh/ssh_login” module to test if there is such a credential where username and password are the same. If such username-password pair is found very quickly, for example, within 0-4 login attempts, Snort does not raise any alert. We already know that the password of username "vagrant" is also "vagrant", so we move "vagrant" to the 4th line of the username list and run SSH scan:
 ![](https://github.com/yumoL/cybersecurity-project2/blob/main/images/ssh-exploit.png)
 Snort does not raise any alert.
-It is worth noting that if we move "vagrant" to the end of the usernames file and make the ssh attempt fail for many times, Snort does raise alerts
+It is worth noting that if we move "vagrant" to the end of the usernames file and make the SSH attempt fail for many times, Snort does raise alerts
 ```
 03/23-15:47:22.466160  [**] [1:2001219:19] ET SCAN Potential SSH Scan [**] [Classification: Attempted Information Leak] [Priority: 2] {TCP} 172.28.128.1:33117 -> 172.28.128.3:22
 ```
