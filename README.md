@@ -5,13 +5,13 @@ Target machine: Metasploitable 3 running in VirtualBox (IP address: 172.28.128.3
 
 Attacker: Ubuntu 18.04.5 LTS (physical machine) (IP address 172.28.128.1 and 192.168.1.166)
 
-Before conducting attacks, run `sudo nmap -sS -sV -v -n -p- 172.28.128.3` to scan ports of target mahcine. `-sS` sends TCP SYN; `-sV` probes open ports to determine service/version info, `-v` represents verbose, showing the scan process, `-n` ignores DNS resolution as the target machine and the attacker are in the same internal network, and `-p-` scans all 65535 ports.
+Before conducting attacks, run `sudo nmap -sS -sV -v -n -p- 172.28.128.3` to scan ports of target mahcine. `-sS` sends TCP SYN, `-sV` probes open ports to determine service/version info, `-v` represents verbose, showing the scan process, `-n` ignores DNS resolution as the target machine and the attacker are in the same internal network, and `-p-` scans all 65535 ports.
 
 Result:
 
 ![](https://github.com/yumoL/cybersecurity-project2/blob/main/images/open_port.png)
 
-The previous 4 attacks were conducted based on the [known exploits](https://stuffwithaurum.com/2020/04/17/metasploitable-3-linux-an-exploitation-guide/)
+The previous 4 attacks are conducted based on the [known exploits](https://stuffwithaurum.com/2020/04/17/metasploitable-3-linux-an-exploitation-guide/)
 ### Identified Attack 1: ProFTPD
 The vulnerability of the ProFTPD server running on port 21 can be exploited using the “exploit/unix/ftp/proftpd_modcopy_exec” module.
 ![](https://github.com/yumoL/cybersecurity-project2/blob/main/images/ftp-exploit.png)
@@ -61,7 +61,7 @@ It is worth noting that if we move "vagrant" to the end of the usernames file an
 ```
 03/23-15:47:22.466160  [**] [1:2001219:19] ET SCAN Potential SSH Scan [**] [Classification: Attempted Information Leak] [Priority: 2] {TCP} 172.28.128.1:33117 -> 172.28.128.3:22
 ```
-The reason is that Snort raises such alerts only if the number of login failures/login attempt time is over a specific threshold.
+The reason is that Snort raise alerts for possible SSH attacks if the number of login failures is over a specific threshold.
 ![](https://github.com/yumoL/cybersecurity-project2/blob/main/images/ssh-rules.png)
 
 
