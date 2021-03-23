@@ -5,7 +5,7 @@ Target machine: Metasploitable 3 running in VirtualBox (IP address: 172.28.128.3
 
 Attacker: Ubuntu 18.04.5 LTS (physical machine) (IP address 172.28.128.1 and 192.168.1.166)
 
-Before conducting attacks, we run `sudo nmap -sS -sV -v -n -p- 172.28.128.3` to scan . `-sS` sends TCP SYN; `-sV` probes open ports to determine service/version info, `-v` represents verbose, showing the scan process, `-n` ignores DNS resolution as the target machine and the attacker are in the same internal network, and `-p-` scans all 65535 ports.
+Before conducting attacks, run `sudo nmap -sS -sV -v -n -p- 172.28.128.3` to scan ports of target mahcine. `-sS` sends TCP SYN; `-sV` probes open ports to determine service/version info, `-v` represents verbose, showing the scan process, `-n` ignores DNS resolution as the target machine and the attacker are in the same internal network, and `-p-` scans all 65535 ports.
 
 Result:
 
@@ -13,7 +13,7 @@ Result:
 
 The following attacks were conducted based on [known exploits](https://stuffwithaurum.com/2020/04/17/metasploitable-3-linux-an-exploitation-guide/)
 ### Identified Attack 1: ProFTPD
-The ProFTPD service was running on port 21.
+The ProFTPD service is running on port 21.
 ![](https://github.com/yumoL/cybersecurity-project2/blob/main/images/ftp-exploit.png)
 Snort logs:
 ```
@@ -22,7 +22,7 @@ Snort logs:
 ```
 
 ### Identified Attack 2: Apache Httpd
-The Apache HTTP server was running on port 80.
+The Apache HTTP server is running on port 80.
 ![](https://github.com/yumoL/cybersecurity-project2/blob/main/images/apache-exploit.png)
 Snort logs:
 ```
@@ -35,11 +35,20 @@ Snort logs:
 ```
 
 ### Identified Attack 3: Unreal IRCd
-The Unreal IRCd application was running on port 6697.
+The Unreal IRCd application is running on port 6697.
 ![](https://github.com/yumoL/cybersecurity-project2/blob/main/images/ircd-exploit.png)
 Snort logs:
 ```
 03/23-12:49:48.321008  [**] [1:2000355:5] ET CHAT IRC authorization message [**] [Classification: Misc activity] [Priority: 3] {TCP} 172.28.128.3:6697 -> 172.28.128.1:41853
 03/23-12:49:51.617427  [**] [1:2019284:1] ET ATTACK_RESPONSE Output of id command from HTTP server [**] [Classification: Potentially Bad Traffic] [Priority: 2] {TCP} 172.28.128.3:54688 -> 172.28.128.1:4444
 ```
+### Unidentified Attack 1: Docker Daemon Local Privilege Escalation
+As shown in the [known exploits](https://stuffwithaurum.com/2020/04/17/metasploitable-3-linux-an-exploitation-guide/), the docker daemon running on the target mahcine exposes an unprotected TCP socket. We can use the session obtained from the attack on Unreal IRCd as this session is running by a user who is in docker group. First we keep the obtained session running on background:
+![](https://github.com/yumoL/cybersecurity-project2/blob/main/images/ircd-background.png)
+Then we can conduct the attack:
+![](https://github.com/yumoL/cybersecurity-project2/blob/main/images/docker-exploit.png)
+Snort logs nothing about this exploit.
+
+### Unidentified Attack 2: Brute-forcing SSH
+Since we already know a valid credential (username: vagrant, pwaasword:vagrant), we can use it 
 
