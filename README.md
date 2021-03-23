@@ -11,7 +11,7 @@ Result:
 
 ![](https://github.com/yumoL/cybersecurity-project2/blob/main/images/open_port.png)
 
-The following attacks were conducted based on the [known exploits](https://stuffwithaurum.com/2020/04/17/metasploitable-3-linux-an-exploitation-guide/)
+The previous 4 attacks were conducted based on the [known exploits](https://stuffwithaurum.com/2020/04/17/metasploitable-3-linux-an-exploitation-guide/)
 ### Identified Attack 1: ProFTPD
 The ProFTPD service is running on port 21.
 ![](https://github.com/yumoL/cybersecurity-project2/blob/main/images/ftp-exploit.png)
