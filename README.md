@@ -11,7 +11,7 @@ Result:
 
 ![](https://github.com/yumoL/cybersecurity-project2/blob/main/images/open_port.png)
 
-The following attacks were conducted based on [known exploits](https://stuffwithaurum.com/2020/04/17/metasploitable-3-linux-an-exploitation-guide/)
+The following attacks were conducted based on the [known exploits](https://stuffwithaurum.com/2020/04/17/metasploitable-3-linux-an-exploitation-guide/)
 ### Identified Attack 1: ProFTPD
 The ProFTPD service is running on port 21.
 ![](https://github.com/yumoL/cybersecurity-project2/blob/main/images/ftp-exploit.png)
@@ -51,7 +51,9 @@ Snort logs nothing about this exploit.
 
 ### Unidentified Attack 2: Brute-forcing SSH
 In the previous attack it is possible to get a set of usernames.
+
 ![](https://github.com/yumoL/cybersecurity-project2/blob/main/images/usernames.png)
+
 We save these usernames to [usernames.txt](https://github.com/yumoL/cybersecurity-project2/blob/main/usernames.txt). In the brute-forcing ssh, we test if there is such a credential where username and password are the same. Since we already know that the password of username "vagrant" is also "vagrant", we move "vagrant" to the second line of username list and run brute-forcing ssh:
 ![](https://github.com/yumoL/cybersecurity-project2/blob/main/images/ssh-exploit.png)
 Snort does not raise any alert.
