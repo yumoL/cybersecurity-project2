@@ -61,7 +61,7 @@ It is worth noting that if we move "vagrant" to the end of the usernames file an
 ```
 03/23-15:47:22.466160  [**] [1:2001219:19] ET SCAN Potential SSH Scan [**] [Classification: Attempted Information Leak] [Priority: 2] {TCP} 172.28.128.1:33117 -> 172.28.128.3:22
 ```
-The reason is that Snort raise alerts for possible SSH attacks if the number of login failures is over a specific threshold.
+The reason is that Snort raises alerts for possible SSH attacks if the number of login failures is over a specific threshold.
 ![](https://github.com/yumoL/cybersecurity-project2/blob/main/images/ssh-rules.png)
 
 
