@@ -50,5 +50,18 @@ Then we can conduct the attack:
 Snort logs nothing about this exploit.
 
 ### Unidentified Attack 2: Brute-forcing SSH
-Since we already know a valid credential (username: vagrant, pwaasword:vagrant), we can use it 
+In the previous attack it is possible to get a set of usernames.
+![]
+Since we already know that the password of username "vagrant" is also "vagrant", we move "vagrant" to the second line of username list and run brute-forcing ssh:
+![]
+Snort does not raise any alert.
+It is worth noting that if we move "vagrant" to the end of the usernames file and make the ssh attempt fail for several times, snort does raise alerts
+```
+03/23-15:47:22.466160  [**] [1:2001219:19] ET SCAN Potential SSH Scan [**] [Classification: Attempted Information Leak] [Priority: 2] {TCP} 172.28.128.1:33117 -> 172.28.128.3:22
+```
+The reason is that Snort raises such alerts only if the number of login failures/login attempt time is over a specific threshold.
+![]
+
+
+
 
