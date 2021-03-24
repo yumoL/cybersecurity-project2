@@ -42,14 +42,14 @@ Snort logs:
 03/23-12:49:48.321008  [**] [1:2000355:5] ET CHAT IRC authorization message [**] [Classification: Misc activity] [Priority: 3] {TCP} 172.28.128.3:6697 -> 172.28.128.1:41853
 03/23-12:49:51.617427  [**] [1:2019284:1] ET ATTACK_RESPONSE Output of id command from HTTP server [**] [Classification: Potentially Bad Traffic] [Priority: 2] {TCP} 172.28.128.3:54688 -> 172.28.128.1:4444
 ```
-### Unidentified Attack 1: Docker Daemon Local Privilege Escalation
+### Missed Attack 1: Docker Daemon Local Privilege Escalation
 As mentioned in the [known exploits](https://stuffwithaurum.com/2020/04/17/metasploitable-3-linux-an-exploitation-guide/), the Docker daemon running on the target mahcine exposes an unprotected TCP socket. We can use the session obtained from the attack on Unreal IRCd as this session is running by a user who is in docker group. First we keep the obtained session running on background:
 ![](https://github.com/yumoL/cybersecurity-project2/blob/main/images/ircd-background.png)
 Then we can exploit this vulnerability using the “exploit/linux/local/docker_daemon_privilege_escalation” module.:
 ![](https://github.com/yumoL/cybersecurity-project2/blob/main/images/docker-exploit.png)
 Snort logs nothing about this exploit.
 
-### Unidentified Attack 2: Brute-forcing SSH
+### Missed Attack 2: Brute-forcing SSH
 In the previous attack we can obtain a list of usernames
 
 ![](https://github.com/yumoL/cybersecurity-project2/blob/main/images/usernames.png)
