@@ -22,7 +22,7 @@ Snort logs:
 ```
 
 ### Identified Attack 2: Apache Httpd
-The vulnerability of the Apache http server running on port 80 can exploited using the “exploit/multi/http/apache_mod_cgi_bash_env_exec” module.
+The vulnerability of the Apache http server running on port 80 can be exploited using the “exploit/multi/http/apache_mod_cgi_bash_env_exec” module.
 ![](https://github.com/yumoL/cybersecurity-project2/blob/main/images/apache-exploit.png)
 Snort logs:
 ```
@@ -43,7 +43,7 @@ Snort logs:
 03/23-12:49:51.617427  [**] [1:2019284:1] ET ATTACK_RESPONSE Output of id command from HTTP server [**] [Classification: Potentially Bad Traffic] [Priority: 2] {TCP} 172.28.128.3:54688 -> 172.28.128.1:4444
 ```
 ### Missed Attack 1: Docker Daemon Local Privilege Escalation
-As mentioned in the [known exploits](https://stuffwithaurum.com/2020/04/17/metasploitable-3-linux-an-exploitation-guide/), the Docker daemon running on the target mahcine exposes an unprotected TCP socket. We can use the session obtained from the attack on Unreal IRCd as this session is running by a user who is in docker group. First we keep the obtained session running on background:
+As mentioned in the [known exploits](https://stuffwithaurum.com/2020/04/17/metasploitable-3-linux-an-exploitation-guide/), the Docker daemon running on the target mahcine exposes an unprotected TCP socket. We can use the session obtained from the attack on Unreal IRCd as this session is running by a user who is in the docker group. First we keep the obtained session running in the background:
 ![](https://github.com/yumoL/cybersecurity-project2/blob/main/images/ircd-background.png)
 Then we can exploit this vulnerability using the “exploit/linux/local/docker_daemon_privilege_escalation” module.:
 ![](https://github.com/yumoL/cybersecurity-project2/blob/main/images/docker-exploit.png)
